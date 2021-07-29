@@ -84,7 +84,6 @@ def main():
         preprocess_df = preprocess(features_df, 'Online')
 
         prediction = model.predict(preprocess_df)
-        st.write(prediction)
 
         if st.button('Predict'):
             if prediction == 1:
@@ -94,42 +93,28 @@ def main():
         
 
     else:
-        if add_selectbox == "Batch":
-            st.subheader("Dataset upload")
-            file_upload = st.file_uploader("Upload csv file for predictions", type=["csv"])
-            if file_upload is not None:
-                st.write(type(file_upload))
-                file_detail = {"filename": file_upload.name,
-                "filetype": file_upload.type,
-                "filesize": file_upload.size}
-                st.write(file_detail)
-            
-            data_df = pd.read_csv(file_upload)
-
+        st.subheader("Dataset upload")
+        uploaded_file = st.file_uploader("Choose a file")
+        if uploaded_file is not None:
+            data = pd.read_csv(uploaded_file)
+            #Get overview of data
+            st.write(data.head())
+            st.markdown("<h3></h3>", unsafe_allow_html=True)
             #Preprocess inputs
-            preprocess_df = preprocess(data_df, "Batch")
-    
-            prediction = model.predict(preprocess_df)
-            st.write(prediction)
-
+            preprocess_df = preprocess(data, "Batch")
             if st.button('Predict'):
-                if prediction == 1:
-                    st.warning('Yes, the customer will terminate the service.')
-                else:
-                    st.success('No, the customer is happy with Telco Services.')
+                #Get batch prediction
+                prediction = model.predict(preprocess_df)
+                prediction_df = pd.DataFrame(prediction, columns=["Predictions"])
+                prediction_df = prediction_df.replace({1:'Yes, the customer will terminate the service.', 
+                                                    0:'No, the customer is happy with Telco Services.'})
 
-
-        
-        
-
-        
-
-
-
-
-
+                st.markdown("<h3></h3>", unsafe_allow_html=True)
+                st.subheader('Prediction')
+                st.write(prediction_df)
+            
 if __name__ == '__main__':
-	main()
+        main()
 
 
 
