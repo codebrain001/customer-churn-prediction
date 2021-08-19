@@ -3,7 +3,7 @@
 Churn rate is an efficient indicator for subscription-based companies. Identifying customers who aren't happy with provided solutions allows businesses to learn about product or pricing plan weak points, operation issues, and customer preferences and expectations to reduce reasons for churn proactively.
 
 Designing churn prediction workflow
-The overall scope to build an ML-powered application to forecast customer attrition is generic to standardized mL project structure that includes the following steps:
+The overall scope to build an ML-powered application to forecast customer attrition is generic to standardized ML project structure that includes the following steps:
 
 1. Defining the problem and the goal: It's essential to understand what insights one needs to get from the analysis and prediction. Understanding the problem and gathering requirements of stakeholders' pain points and expectations.
 2. Establishing data source: Next, specifying data sources is necessary for the following stage of modeling. Some popular sources of churn data are CRM systems, Analytics services, and customer feedback.
